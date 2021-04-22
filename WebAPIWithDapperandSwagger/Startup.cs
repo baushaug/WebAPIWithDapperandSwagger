@@ -1,13 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Swagger;
-
-using WebAPIWithDapperandSwagger.Models;
 using WebAPIWithDapperandSwagger.Repository;
 
 
@@ -15,12 +10,13 @@ namespace WebAPIWithDapperandSwagger
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IWebHostEnvironment whEnv)//IHostingEnvironment env, 
         {
+            
             var builder = new ConfigurationBuilder()
-                 .SetBasePath(env.ContentRootPath)
+                 .SetBasePath(whEnv.ContentRootPath)
                  .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                 .AddJsonFile($"appsettings.{whEnv.EnvironmentName}.json", optional: true)
                  .AddEnvironmentVariables();
 
             Configuration = builder.Build();
